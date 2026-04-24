@@ -1,14 +1,17 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-# Die Tische (erstmal hardgecoded, später kommt die DB)
+# Die Tische
 TABLES = [
     {"id": 1, "name": "Table A1", "type": "Single", "seats": 1, "floor": "EG", "free": True},
     {"id": 2, "name": "Table A2", "type": "Single", "seats": 1, "floor": "EG", "free": True},
     {"id": 3, "name": "Table A3", "type": "Single", "seats": 1, "floor": "EG", "free": True},
     {"id": 4, "name": "Table A4", "type": "Single", "seats": 1, "floor": "EG", "free": True},
 ]
+
+# Reservierungen (in-memory, wird beim Serverstart zurückgesetzt — später DB)
+RESERVATIONS = []
 
 @app.route("/")
 def hello():
@@ -24,6 +27,25 @@ def get_table(table_id):
     if table is None:
         return jsonify({"error": "Table not found"}), 404
     return jsonify(table)
+
+@app.route("/api/reservations", methods=["POST"])
+def create_reservation():
+    data = request.get_json()
+    reservation = {
+        "id": len(RESERVATIONS) + 1,
+        "table_id": data.get("table_id"),
+        "name": data.get("name"),
+        "email": data.get("email"),
+        "date": data.get("date"),
+        "time_slot": data.get("time_slot"),
+        "notes": data.get("notes", ""),
+    }
+    RESERVATIONS.append(reservation)
+    return jsonify(reservation), 201
+
+@app.route("/api/reservations")
+def get_reservations():
+    return jsonify(RESERVATIONS)
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
