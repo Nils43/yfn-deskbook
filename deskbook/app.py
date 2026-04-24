@@ -18,5 +18,12 @@ def hello():
 def get_tables():
     return jsonify(TABLES)
 
+@app.route("/api/tables/<int:table_id>")
+def get_table(table_id):
+    table = next((t for t in TABLES if t["id"] == table_id), None)
+    if table is None:
+        return jsonify({"error": "Table not found"}), 404
+    return jsonify(table)
+
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
