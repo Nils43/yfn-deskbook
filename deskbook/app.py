@@ -47,5 +47,12 @@ def create_reservation():
 def get_reservations():
     return jsonify(RESERVATIONS)
 
+from flask import send_from_directory
+
+@app.route("/app")
+def serve_app():
+    return send_from_directory(".", "index.html")
+
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
+

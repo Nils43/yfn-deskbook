@@ -157,12 +157,13 @@
 <footer>© 2026 Young Founders Network e.V.</footer>
 
 <script>
-const D=[
-  {id:1,name:'Table A1',type:'Single',seats:1,floor:'EG',free:true},
-  {id:2,name:'Table A2',type:'Single',seats:1,floor:'EG',free:true},
-  {id:3,name:'Table A3',type:'Single',seats:1,floor:'EG',free:true},
-  {id:4,name:'Table A4',type:'Single',seats:1,floor:'EG',free:true},
-];
+let D = [];
+
+async function loadTables() {
+  const res = await fetch('/api/tables');
+  D = await res.json();
+  render();
+}
 
 let sel=null;
 
@@ -190,16 +191,36 @@ function pick(id){
   render();
 }
 
-document.getElementById('form').onsubmit=e=>{
+document.getElementById('form').onsubmit = async e => {
   e.preventDefault();
-  if(!sel)return;
-  const name=document.getElementById('fn').value+' '+document.getElementById('ln').value;
-  const date=new Date(dt.value).toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'long'});
-  document.getElementById('det').innerHTML=`
+  if (!sel) return;
+
+  const reservation = {
+    table_id: sel.id,
+    name: document.getElementById('fn').value + ' ' + document.getElementById('ln').value,
+    email: document.getElementById('em').value,
+    date: dt.value,
+    time_slot: document.getElementById('ts').value,
+    notes: document.getElementById('note').value,
+  };
+
+  const res = await fetch('/api/reservations', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(reservation),
+  });
+
+  if (!res.ok) {
+    alert('Reservation failed');
+    return;
+  }
+
+  const date = new Date(dt.value).toLocaleDateString('en-GB', {weekday:'short', day:'numeric', month:'long'});
+  document.getElementById('det').innerHTML = `
     <div class="d-row"><span class="l">Table</span><span class="v">${sel.name} (${sel.type})</span></div>
-    <div class="d-row"><span class="l">Name</span><span class="v">${name}</span></div>
+    <div class="d-row"><span class="l">Name</span><span class="v">${reservation.name}</span></div>
     <div class="d-row"><span class="l">Date</span><span class="v">${date}</span></div>
-    <div class="d-row"><span class="l">Time</span><span class="v">${document.getElementById('ts').value}</span></div>`;
+    <div class="d-row"><span class="l">Time</span><span class="v">${reservation.time_slot}</span></div>`;
   document.getElementById('ov').classList.add('show');
 };
 
@@ -214,7 +235,7 @@ function close_(){
 
 document.getElementById('ov').onclick=e=>{if(e.target===document.getElementById('ov'))close_()};
 
-render();
+loadTables();
 </script>
 </body>
 </html>
