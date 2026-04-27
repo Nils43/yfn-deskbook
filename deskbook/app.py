@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 
 app = Flask(__name__)
 
@@ -13,13 +13,16 @@ TABLES = [
 # Reservierungen (in-memory, wird beim Serverstart zurückgesetzt — später DB)
 RESERVATIONS = []
 
+
 @app.route("/")
 def hello():
     return "DeskBook backend is running 🚀"
 
+
 @app.route("/api/tables")
 def get_tables():
     return jsonify(TABLES)
+
 
 @app.route("/api/tables/<int:table_id>")
 def get_table(table_id):
@@ -27,6 +30,7 @@ def get_table(table_id):
     if table is None:
         return jsonify({"error": "Table not found"}), 404
     return jsonify(table)
+
 
 @app.route("/api/reservations", methods=["POST"])
 def create_reservation():
@@ -43,16 +47,21 @@ def create_reservation():
     RESERVATIONS.append(reservation)
     return jsonify(reservation), 201
 
+
 @app.route("/api/reservations")
 def get_reservations():
     return jsonify(RESERVATIONS)
 
-from flask import send_from_directory
 
 @app.route("/app")
 def serve_app():
-    return send_from_directory(".", "index.html")
+    return render_template("index.html")
+
+
+@app.route("/reservations")
+def reservations_page():
+    return render_template("reservations.html", reservations=RESERVATIONS)
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
-
