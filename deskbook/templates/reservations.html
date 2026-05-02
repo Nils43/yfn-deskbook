@@ -2,26 +2,33 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>YFN — Reservations</title>
+  <title>YFN — My Reservations</title>
   <style>
     body { font-family: -apple-system, sans-serif; background: #0a0a0a; color: #fff; padding: 2rem; }
-    h1 { margin-bottom: 1.5rem; }
+    h1 { margin-bottom: 0.4rem; }
+    .sub { color: #4EF3F5; font-size: 0.88rem; margin-bottom: 1.5rem; }
     .card { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 10px; padding: 1rem; margin-bottom: 0.6rem; }
     .row { display: flex; justify-content: space-between; font-size: 0.85rem; padding: 0.15rem 0; }
     .l { color: #4EF3F5; }
     .empty { color: #4EF3F5; font-size: 0.9rem; }
+    .nav-links { margin-bottom: 1rem; }
+    .nav-links a { color: #FFED00; text-decoration: none; font-size: 0.82rem; margin-right: 1rem; }
   </style>
 </head>
 <body>
-  <h1>All Reservations ({{ reservations|length }})</h1>
-
+  <div class="nav-links">
+    <a href="/me">← Account</a>
+    <a href="/app">Book a desk</a>
+  </div>
+ 
+  <h1>My Reservations ({{ reservations|length }})</h1>
+  <p class="sub">Logged in as {{ user.email }}</p>
+ 
   {% if reservations %}
     {% for r in reservations %}
       <div class="card">
         <div class="row"><span class="l">ID</span><span>#{{ r.id }}</span></div>
         <div class="row"><span class="l">Table</span><span>{{ r.table_id }}</span></div>
-        <div class="row"><span class="l">Name</span><span>{{ r.name }}</span></div>
-        <div class="row"><span class="l">Email</span><span>{{ r.email }}</span></div>
         <div class="row"><span class="l">Date</span><span>{{ r.date }} · {{ r.time_slot }}</span></div>
         {% if r.notes %}
           <div class="row"><span class="l">Notes</span><span>{{ r.notes }}</span></div>
@@ -29,7 +36,7 @@
       </div>
     {% endfor %}
   {% else %}
-    <p class="empty">No reservations yet. Book a table at <a href="/app" style="color:#FFED00">/app</a>.</p>
+    <p class="empty">No reservations yet. <a href="/app" style="color:#FFED00">Book a table</a>.</p>
   {% endif %}
 </body>
-</html>‚
+</html>

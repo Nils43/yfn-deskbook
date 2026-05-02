@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YFN — Account</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --card: #1a1a1a;
+      --border: #2a2a2a;
+      --text: #fff;
+      --muted: #4EF3F5;
+      --green: #FFED00;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; }
+    nav { padding: 1rem 2rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 0.6rem; font-weight: 700; font-size: 1rem; }
+    .logo-mark { width: 26px; height: 26px; background: var(--green); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.6rem; font-weight: 800; color: var(--bg); }
+    .container { max-width: 480px; margin: 0 auto; padding: 4rem 1.5rem; }
+    h1 { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 0.3rem; }
+    .sub { color: var(--muted); font-size: 0.88rem; margin-bottom: 2rem; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem; margin-bottom: 1.5rem; }
+    .row { display: flex; justify-content: space-between; font-size: 0.85rem; padding: 0.3rem 0; }
+    .l { color: var(--muted); font-weight: 500; }
+    .v { font-weight: 600; }
+    .actions { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+    .btn { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.85rem; border-radius: 50px; padding: 0.7rem 1.4rem; cursor: pointer; text-decoration: none; display: inline-block; border: none; }
+    .btn-primary { color: var(--bg); background: var(--green); }
+    .btn-primary:hover { background: #e6d500; }
+    .btn-secondary { color: var(--text); background: transparent; border: 1px solid var(--border); }
+    .btn-secondary:hover { border-color: var(--muted); }
+    form { display: inline; }
+  </style>
+</head>
+<body>
+ 
+<nav>
+  <div class="logo-mark">YFN</div>
+  DeskBook
+</nav>
+ 
+<div class="container">
+  <h1>Hi, {{ user.name }} 👋</h1>
+  <p class="sub">You're logged in.</p>
+ 
+  <div class="card">
+    <div class="row"><span class="l">Name</span><span class="v">{{ user.name }}</span></div>
+    <div class="row"><span class="l">Email</span><span class="v">{{ user.email }}</span></div>
+    <div class="row"><span class="l">User ID</span><span class="v">#{{ user.id }}</span></div>
+  </div>
+ 
+  <div class="actions">
+    <a class="btn btn-primary" href="/app">Book a desk</a>
+    <a class="btn btn-secondary" href="/reservations">All reservations</a>
+    <form method="POST" action="/logout">
+      <button class="btn btn-secondary" type="submit">Log out</button>
+    </form>
+  </div>
+</div>
+ 
+</body>
+</html>

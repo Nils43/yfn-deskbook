@@ -19,7 +19,7 @@
     }
     * { margin:0; padding:0; box-sizing:border-box; }
     body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; -webkit-font-smoothing:antialiased; }
-
+ 
     nav {
       padding:1rem 2rem;
       border-bottom:1px solid var(--border);
@@ -29,74 +29,47 @@
       font-weight:700;
       font-size:1rem;
     }
-    .logo-mark {
-      width:26px; height:26px; background:var(--green); border-radius:6px;
-      display:flex; align-items:center; justify-content:center;
-      font-size:0.6rem; font-weight:800; color:var(--bg);
-    }
-
-    .container {
-      max-width:560px;
-      margin:0 auto;
-      padding:3rem 1.5rem 5rem;
-    }
-
+    .logo-mark { width:26px; height:26px; background:var(--green); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:0.6rem; font-weight:800; color:var(--bg); }
+    nav .spacer { flex: 1; }
+    nav .user-pill { font-size: 0.75rem; color: var(--muted); font-weight: 500; }
+    nav a { color: var(--text); text-decoration: none; font-size: 0.8rem; font-weight: 500; padding: 0.3rem 0.7rem; border-radius: 50px; border: 1px solid var(--border); }
+    nav a:hover { border-color: var(--muted); }
+ 
+    .container { max-width:560px; margin:0 auto; padding:3rem 1.5rem 5rem; }
     h1 { font-size:1.6rem; font-weight:700; letter-spacing:-0.03em; margin-bottom:0.3rem; }
     .sub { color:var(--muted); font-size:0.88rem; margin-bottom:2rem; }
-
     .desk-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.6rem; margin-bottom:2rem; }
     @media(max-width:480px){ .desk-grid{grid-template-columns:1fr;} }
-
-    .desk {
-      background:var(--card); border:1px solid var(--border); border-radius:10px;
-      padding:1rem; cursor:pointer; transition:all 0.15s;
-    }
+ 
+    .desk { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:1rem; cursor:pointer; transition:all 0.15s; }
     .desk:hover { border-color:#444; }
     .desk.selected { border-color:var(--green); background:var(--green-bg); }
     .desk.taken { opacity:0.3; pointer-events:none; }
-
     .desk-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:0.3rem; }
     .desk-name { font-weight:600; font-size:0.88rem; }
     .badge { font-size:0.6rem; font-weight:600; padding:0.15rem 0.5rem; border-radius:50px; }
     .badge.free { background:var(--green-bg); color:var(--green); border:1px solid var(--green-border); }
     .badge.busy { background:rgba(239,68,68,0.1); color:var(--red); border:1px solid rgba(239,68,68,0.2); }
     .desk-detail { font-size:0.72rem; color:var(--muted); }
-
+ 
     .form-title { font-size:0.95rem; font-weight:600; margin-bottom:1rem; }
     .row { display:grid; grid-template-columns:1fr 1fr; gap:0.6rem; }
     .field { margin-bottom:1rem; }
     .field label { display:block; font-size:0.68rem; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; color:var(--muted); margin-bottom:0.3rem; }
-    .field input, .field select, .field textarea {
-      width:100%; font-family:'Inter',sans-serif; font-size:0.85rem; color:var(--text);
-      background:var(--card); border:1px solid var(--border); border-radius:8px;
-      padding:0.65rem 0.8rem; outline:none; -webkit-appearance:none;
-    }
-    .field select {
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234EF3F5' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-      background-repeat:no-repeat; background-position:right 0.7rem center; padding-right:2rem; cursor:pointer;
-    }
+    .field input, .field select, .field textarea { width:100%; font-family:'Inter',sans-serif; font-size:0.85rem; color:var(--text); background:var(--card); border:1px solid var(--border); border-radius:8px; padding:0.65rem 0.8rem; outline:none; -webkit-appearance:none; }
+    .field select { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234EF3F5' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 0.7rem center; padding-right:2rem; cursor:pointer; }
     .field select option { background:var(--card); }
     .field textarea { resize:vertical; min-height:55px; }
     .field input:focus, .field select:focus, .field textarea:focus { border-color:var(--green); }
     .field input::placeholder, .field textarea::placeholder { color:#444; }
-
-    .btn {
-      width:100%; font-family:'Inter',sans-serif; font-weight:600; font-size:0.88rem;
-      color:var(--bg); background:var(--green); border:none; border-radius:50px;
-      padding:0.8rem; cursor:pointer; transition:all 0.15s; margin-top:0.5rem;
-    }
+ 
+    .btn { width:100%; font-family:'Inter',sans-serif; font-weight:600; font-size:0.88rem; color:var(--bg); background:var(--green); border:none; border-radius:50px; padding:0.8rem; cursor:pointer; transition:all 0.15s; margin-top:0.5rem; }
     .btn:hover { background:#e6d500; }
     .btn:disabled { opacity:0.25; pointer-events:none; }
-
-    .overlay {
-      display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6);
-      backdrop-filter:blur(8px); z-index:100; align-items:center; justify-content:center; padding:1.5rem;
-    }
+ 
+    .overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); backdrop-filter:blur(8px); z-index:100; align-items:center; justify-content:center; padding:1.5rem; }
     .overlay.show { display:flex; }
-    .modal {
-      background:var(--card); border:1px solid var(--border); border-radius:16px;
-      padding:2rem; text-align:center; max-width:380px; width:100%;
-    }
+    .modal { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:2rem; text-align:center; max-width:380px; width:100%; }
     .modal h2 { font-size:1.15rem; margin-bottom:0.3rem; }
     .modal p { font-size:0.82rem; color:var(--muted); margin-bottom:1.2rem; }
     .modal .details { background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:0.8rem; margin-bottom:1.2rem; text-align:left; }
@@ -105,30 +78,28 @@
     .modal .d-row .v { font-weight:600; }
     .modal .close { font-family:'Inter',sans-serif; font-weight:600; font-size:0.8rem; color:var(--bg); background:var(--green); border:none; border-radius:50px; padding:0.6rem 2rem; cursor:pointer; }
     .modal .close:hover { background:#e6d500; }
-
+ 
     footer { text-align:center; padding:2rem; font-size:0.7rem; color:var(--muted); border-top:1px solid var(--border); }
   </style>
 </head>
 <body>
-
+ 
 <nav>
   <div class="logo-mark">YFN</div>
   DeskBook
+  <div class="spacer"></div>
+  <span class="user-pill">{{ user.email }}</span>
+  <a href="/me">Account</a>
 </nav>
-
+ 
 <div class="container">
   <h1>Book a table</h1>
   <p class="sub">Choose a workspace and book it.</p>
-
+ 
   <div class="desk-grid" id="grid"></div>
-
+ 
   <div class="form-title">Reservation</div>
   <form id="form" autocomplete="off">
-    <div class="row">
-      <div class="field"><label>First Name</label><input id="fn" placeholder="Max" required></div>
-      <div class="field"><label>Last Name</label><input id="ln" placeholder="Muster" required></div>
-    </div>
-    <div class="field"><label>Email</label><input type="email" id="em" placeholder="max@yfn.de" required></div>
     <div class="row">
       <div class="field"><label>Date</label><input type="date" id="dt" required></div>
       <div class="field"><label>Time Slot</label>
@@ -144,7 +115,7 @@
     <button class="btn" id="submit" type="submit" disabled>Reserve</button>
   </form>
 </div>
-
+ 
 <div class="overlay" id="ov">
   <div class="modal">
     <h2>Reserved ✓</h2>
@@ -153,89 +124,90 @@
     <button class="close" onclick="close_()">OK</button>
   </div>
 </div>
-
+ 
 <footer>© 2026 Young Founders Network e.V.</footer>
-
+ 
 <script>
 let D = [];
-
+let sel = null;
+ 
+const dt = document.getElementById('dt');
+const tom = new Date(); tom.setDate(tom.getDate() + 1);
+dt.valueAsDate = tom;
+dt.min = new Date().toISOString().split('T')[0];
+ 
 async function loadTables() {
   const res = await fetch('/api/tables');
   D = await res.json();
   render();
 }
-
-let sel=null;
-
-const dt=document.getElementById('dt');
-const tom=new Date();tom.setDate(tom.getDate()+1);
-dt.valueAsDate=tom;
-dt.min=new Date().toISOString().split('T')[0];
-
-function render(){
-  document.getElementById('grid').innerHTML=D.map(d=>`
-    <div class="desk ${d.id===sel?.id?'selected':''} ${!d.free?'taken':''}" onclick="pick(${d.id})">
+ 
+function render() {
+  document.getElementById('grid').innerHTML = D.map(d => `
+    <div class="desk ${d.id === sel?.id ? 'selected' : ''} ${!d.free ? 'taken' : ''}" onclick="pick(${d.id})">
       <div class="desk-top">
         <span class="desk-name">${d.name}</span>
-        <span class="badge ${d.free?'free':'busy'}">${d.free?'Free':'Taken'}</span>
+        <span class="badge ${d.free ? 'free' : 'busy'}">${d.free ? 'Free' : 'Taken'}</span>
       </div>
-      <div class="desk-detail">${d.type} · ${d.seats} seat${d.seats===1?'':'s'} · ${d.floor}</div>
+      <div class="desk-detail">${d.type} · ${d.seats} seat${d.seats === 1 ? '' : 's'} · ${d.floor}</div>
     </div>`).join('');
 }
-
-function pick(id){
-  const d=D.find(x=>x.id===id);
-  if(!d||!d.free)return;
-  sel=d;
-  document.getElementById('submit').disabled=false;
+ 
+function pick(id) {
+  const d = D.find(x => x.id === id);
+  if (!d || !d.free) return;
+  sel = d;
+  document.getElementById('submit').disabled = false;
   render();
 }
-
+ 
 document.getElementById('form').onsubmit = async e => {
   e.preventDefault();
   if (!sel) return;
-
+ 
   const reservation = {
     table_id: sel.id,
-    name: document.getElementById('fn').value + ' ' + document.getElementById('ln').value,
-    email: document.getElementById('em').value,
     date: dt.value,
     time_slot: document.getElementById('ts').value,
     notes: document.getElementById('note').value,
   };
-
+ 
   const res = await fetch('/api/reservations', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(reservation),
   });
-
+ 
   if (!res.ok) {
+    if (res.status === 401) {
+      window.location.href = '/login';
+      return;
+    }
     alert('Reservation failed');
     return;
   }
-
-  const date = new Date(dt.value).toLocaleDateString('en-GB', {weekday:'short', day:'numeric', month:'long'});
+ 
+  const date = new Date(dt.value).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'long' });
   document.getElementById('det').innerHTML = `
     <div class="d-row"><span class="l">Table</span><span class="v">${sel.name} (${sel.type})</span></div>
-    <div class="d-row"><span class="l">Name</span><span class="v">${reservation.name}</span></div>
     <div class="d-row"><span class="l">Date</span><span class="v">${date}</span></div>
     <div class="d-row"><span class="l">Time</span><span class="v">${reservation.time_slot}</span></div>`;
   document.getElementById('ov').classList.add('show');
 };
-
-function close_(){
+ 
+function close_() {
   document.getElementById('ov').classList.remove('show');
   document.getElementById('form').reset();
-  sel=null;
-  document.getElementById('submit').disabled=true;
-  dt.valueAsDate=tom;
+  sel = null;
+  document.getElementById('submit').disabled = true;
+  dt.valueAsDate = tom;
   render();
 }
-
-document.getElementById('ov').onclick=e=>{if(e.target===document.getElementById('ov'))close_()};
-
+ 
+document.getElementById('ov').onclick = e => { if (e.target === document.getElementById('ov')) close_() };
+ 
 loadTables();
 </script>
 </body>
 </html>
+ 
